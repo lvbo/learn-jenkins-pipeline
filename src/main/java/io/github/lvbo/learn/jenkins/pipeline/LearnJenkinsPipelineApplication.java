@@ -1,4 +1,4 @@
-package io.github.lvbo.learn.jenkins.pipeline.learnjenkinspipeline;
+package io.github.lvbo.learn.jenkins.pipeline;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
