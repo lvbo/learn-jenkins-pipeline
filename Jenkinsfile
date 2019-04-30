@@ -19,10 +19,11 @@ pipeline {
                 }
             }
         }
-        post {
-            always {
-                pmd(canRunOnFailed:true, pattern: '**/target/pmd.xml')
-            }
+    }
+
+    post {
+        always {
+            pmd(canRunOnFailed:true, pattern: '**/target/pmd.xml')
         }
     }
 }
