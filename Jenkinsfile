@@ -22,6 +22,7 @@ pipeline {
                     sh """
                     mvn package org.sonarsource.scanner.maven:sonar-maven-plugin:3.4.1.1168:sonar \
                     -Dsonar.host.url=${SONAR_HOST_URL} \
+                    -Dsonar.login=${SONAR_AUTH_TOKEN}
                     """
                 }
             }
@@ -29,7 +30,12 @@ pipeline {
         stage('Quality Gate') {
             steps {
                 timeout(time: 1, unit: 'HOURS') {
-                    waitForQualityGate abortPipeline: true
+                    // waitForQualityGate abortPipeline: true
+                    def qg = waitForQualityGate('sonarqube')
+                    //注意：这里waitForQualityGate()中的参数也要与之前SonarQube servers中Name的配置相同
+                    if (qg.status != 'OK') {
+                        error "未通过Sonarqube的代码质量阈检查，请及时修改！failure: ${qg.status}"
+                    }
                 }
             }
         }
