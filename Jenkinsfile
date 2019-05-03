@@ -16,10 +16,29 @@ pipeline {
                 sh "mvn pmd:pmd"
             }
         }
+        stage('Code Analysis') {
+            steps {
+                withSonarQubeEnv('sonarqube') {
+                    sh """
+                    mvn package org.sonarsource.scanner.maven.sonar-maven-plugin: 3.4.1.1168:
+                    sonar \
+                    -Dsonar.host.url=${SONAR_HOST_URL} \
+                    -Dsonar.login=${SONAR_AUTH_TOKEN}
+                    """
+                }
+            }
+        }
+        stage('Quality Gate') {
+            steps {
+                timeout(time: 1, unit: 'HOURS') {
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
         stage('Build') {
             steps {
                 configFileProvider([configFile(fileId: 'maven-global-setting', variable: 'MAVEN_GLOBAL_ENV')]) {
-                    sh "mvn -s $MAVEN_GLOBAL_ENV package spring-boot:repackage"
+                    sh "mvn -s $MAVEN_GLOBAL_ENV spring-boot:repackage"
                     // sh "printenv"
                     jacoco(
                         // 代码覆盖率统计文件位置，Ant风格路径表达式
