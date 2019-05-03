@@ -62,7 +62,7 @@ pipeline {
             junit testResults: "**/target/surefire-reports/*.xml"
             script {
                 allure ([
-                    includeProperties: faluse,
+                    includeProperties: false,
                     jdk: '',
                     properties: [],
                     reportBuildPolicy: 'ALWAYS',
