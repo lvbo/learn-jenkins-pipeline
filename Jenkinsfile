@@ -55,6 +55,15 @@ pipeline {
         always {
             pmd(canRunOnFailed:true, pattern: '**/target/pmd.xml')
             junit testResults: "**/target/surefire-reports/*.xml"
+            script {
+                allure ([
+                    includeProperties: faluse,
+                    jdk: '',
+                    properties: [],
+                    reportBuildPolicy: 'ALWAYS',
+                    results: [[path: 'target/allure-results']]
+                ])
+            }
             cleanWs()
         }
     }
