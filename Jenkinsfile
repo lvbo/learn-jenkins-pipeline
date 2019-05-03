@@ -18,6 +18,7 @@ pipeline {
         }
         stage('Code Analysis') {
             steps {
+                sh "printenv"
                 withSonarQubeEnv('sonarqube') {
                     sh """
                     mvn package sonar:sonar \
