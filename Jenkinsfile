@@ -7,6 +7,7 @@ pipeline {
 
     triggers {
         cron('45 18 * * *')
+        upstream(upstreamProjects: 'learn-spring-boot-redis', threshold: hudson.model.Result.SUCCESS)
     }
     
     stages {
