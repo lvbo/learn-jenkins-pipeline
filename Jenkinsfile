@@ -11,6 +11,14 @@ pipeline {
     }
     
     stages {
+        stage('trigger downstream') {
+            steps {
+                build(
+                    job:"learn-jenkins-pipeline-downstream"
+                )
+            }
+        }
+
         stage('clean') {
             steps {
                 sh "mvn clean"
