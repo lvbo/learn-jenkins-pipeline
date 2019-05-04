@@ -7,7 +7,7 @@ pipeline {
 
     triggers {
         // cron('45 18 * * *')
-        upstream(upstreamProjects: 'learn-spring-boot-mqtt', threshold: hudson.model.Result.SUCCESS)
+        upstream(upstreamProjects: 'learn-jenkins-pipeline-upstream', threshold: hudson.model.Result.SUCCESS)
     }
     
     stages {
