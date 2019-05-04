@@ -4,6 +4,10 @@ pipeline {
     tools {
         maven 'mvn-3.5.4'
     }
+
+    triggers {
+        cron('45 18 * * *')
+    }
     
     stages {
         stage('clean') {
