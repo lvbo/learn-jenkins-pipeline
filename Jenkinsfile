@@ -16,11 +16,13 @@ pipeline {
                 sh "mvn clean"
             }
         }
+
         stage('pmd') {
             steps {
                 sh "mvn pmd:pmd"
             }
         }
+
         stage('Code Analysis') {
             steps {
                 withSonarQubeEnv('sonarqube') {
@@ -32,6 +34,7 @@ pipeline {
                 }
             }
         }
+
         stage('Quality Gate') {
             steps {
                 timeout(time: 1, unit: 'HOURS') {
@@ -39,6 +42,7 @@ pipeline {
                 }
             }
         }
+
         stage('Build') {
             steps {
                 configFileProvider([configFile(fileId: 'maven-global-setting', variable: 'MAVEN_GLOBAL_ENV')]) {
@@ -47,6 +51,7 @@ pipeline {
                 }
             }
         }
+
         stage('Jacoco') {
             steps {
                jacoco(
@@ -81,9 +86,28 @@ pipeline {
                )
             }
         }
+
         stage("Reports") {
             steps {
                 allure results: [[path: 'target/allure-results']]
+            }
+        }
+
+        stage("deploy to dev") {
+            when {
+                branch 'dev'
+            }
+            steps {
+                echo "====++++deploy to dev++++===="
+            }
+        }
+
+        stage("deploy to test") {
+            when {
+                branch 'master'
+            }
+            steps {
+                echo "====++++deploy to master++++===="
             }
         }
     }
