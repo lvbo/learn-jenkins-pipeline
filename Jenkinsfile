@@ -60,7 +60,7 @@ pipeline {
                    exclusionPattern: 'src/test*',
                    // 是否禁用每行覆盖率的源文件显示
                    skipCopyOfSrcFiles: false,
-                   changeBuildStatus: true,
+                   changeBuildStatus: false,
                    // 字节码指令覆盖率
                    minimumInstructionCoverage: '30', maximumInstructionCoverage: '70',
                    // 行覆盖率
@@ -73,7 +73,7 @@ pipeline {
                    minimumClassCoverage: '30', maximumClassCoverage: '70',
                    // 分支覆盖率
                    minimumBranchCoverage: '30', maximumBranchCoverage: '70',
-                   buildOverBuild: true,
+                   buildOverBuild: false,
                    // 以下是各个维度覆盖率的变化阈值
                    deltaInstructionCoverage: '80', deltaLineCoverage: '80',
                    deltaMethodCoverage: '80', deltaClassCoverage: '80',
