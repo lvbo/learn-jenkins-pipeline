@@ -8,7 +8,7 @@
 		<version>2.1.4.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>io.github.lvbo.learn.jenkins.pipeline</groupId>
+	<groupId>io.github.lvbo</groupId>
 	<artifactId>learn-jenkins-pipeline</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>learn-jenkins-pipeline</name>
@@ -116,11 +116,11 @@
 						</configuration>
 					</execution>
 				</executions>
-				<configuration>
-					<systemPropertyVariables>
-						<jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
-					</systemPropertyVariables>
-				</configuration>
+<!--				<configuration>-->
+<!--					<systemPropertyVariables>-->
+<!--						<jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>-->
+<!--					</systemPropertyVariables>-->
+<!--				</configuration>-->
 			</plugin>
 <!--            <plugin>-->
 <!--				<groupId>org.apache.maven.plugins</groupId>-->

@@ -28,14 +28,11 @@ pipeline {
             }
         }
         stage('Quality Gate') {
+            steps {
                 timeout(time: 1, unit: 'HOURS') {
-                    // waitForQualityGate abortPipeline: true
-                    def qg = waitForQualityGate('sonarqube')
-                    //注意：这里waitForQualityGate()中的参数也要与之前SonarQube servers中Name的配置相同
-                    if (qg.status != 'OK') {
-                        error "未通过Sonarqube的代码质量阈检查，请及时修改！failure: ${qg.status}"
-                    }
+                    waitForQualityGate abortPipeline: true
                 }
+            }
         }
         stage('Build') {
             steps {
