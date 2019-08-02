@@ -1,4 +1,4 @@
-package io.github.lvbo.learn.jenkins.pipeline;
+package io.github.lvbo.learn.spring.boot.swagger.learn.jenkins.pipeline;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
